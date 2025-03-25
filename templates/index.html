@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Pleasant</title>
+    <style>
+        /* Basic Reset */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Header Styles */
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #333;
+            color: white;
+        }
+        
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        /* Image Styles - Round Look */
+        
+        .header-image {
+            display: block;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            object-fit: cover;
+            /* Ensures the image fits within the circle */
+            border: 5px solid #fff;
+            /* Optional border around the image */
+            margin-top: 30px;
+        }
+        /* Main Content */
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Paragraph Styles */
+        
+        .intro {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        /* Footer Styles */
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">FishPleasant</div>
+        <nav>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/aboutus">About Us</a>
+        </nav>
+    </header>
+
+    <!-- Circular Image Above Main Content -->
+    <img src="/img/logo.jpg" alt="FishPleasant Logo" class="header-image">
+
+    <!-- Main Content -->
+    <h1>Welcome to the Fish Pleasant Portal</h1>
+
+    <!-- Added Paragraph about FishPleasant -->
+    <div class="intro">
+        <p>At FishPleasant, we bring you the freshest fish straight from the ocean to your table. Whether you're a seasoned chef or just someone who loves to cook, we provide top-quality seafood from trusted vendors to ensure your meals are delicious and
+            healthy.
+        </p>
+
+        <p>Our platform is designed to make shopping for fish easy and convenient, with a wide variety of species available at competitive prices. From local catches to exotic options, FishPleasant has something for every taste and occasion. We're committed
+            to sustainability and source our fish responsibly, ensuring that every purchase supports ethical fishing practices.</p>
+
+        <p>Join us at FishPleasant, where fresh fish is always within reach, and experience the joy of cooking with the best seafood available!</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 FishPleasant. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

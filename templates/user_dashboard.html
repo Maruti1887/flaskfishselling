@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        /* Header Styles */
+        
+        h1 {
+            text-align: center;
+            color: #2e3b4e;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        /* Seller List Styling */
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px;
+        }
+        
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        /* No Sellers Found Message */
+        
+        p {
+            text-align: center;
+            color: #ff0000;
+            font-size: 1.2em;
+        }
+        /* Logout Link */
+        
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        
+        .logout-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Welcome, {{ session['username'] }}</h1>
+    <h2>Sellers in {{ district }}, {{ place }}</h2>
+
+    {% if sellers %}
+    <ul>
+        {% for seller in sellers %}
+        <li>
+            <a href="{{ url_for('seller_profile', seller_id=seller[0]) }}">
+                        {{ seller[1] }} (Phone: {{ seller[2] }})
+                    </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No sellers available in your location.</p>
+    {% endif %}
+
+    <a href="/logout" class="logout-link">Logout</a>
+
+</body>
+
+</html>

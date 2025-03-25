@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .role-selector {
+            margin-bottom: 20px;
+        }
+        
+        .role-btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #ddd;
+        }
+        
+        .role-btn.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        #seller-fields {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Register</h1>
+
+    <form action="{{ url_for('register') }}" method="POST">
+        <div class="role-selector">
+            <button type="button" class="role-btn active" onclick="selectRole('user', this)">I am a User</button>
+            <button type="button" class="role-btn" onclick="selectRole('seller', this)">I am a Seller</button>
+            <input type="hidden" name="role" id="role" value="user">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District:</label>
+            <select id="district" name="district" onchange="updatePlaces()" required>
+                <option value="">Select District</option>
+                <option value="BangaloreUrban">Bangalore Urban</option>
+                <option value="BangaloreRural">Bangalore Rural</option>
+                <option value="Bagalkot">Bagalkot</option>
+                <option value="Ballari">Ballari</option>
+                <option value="Belagavi">Belagavi</option>
+                <option value="Bidar">Bidar</option>
+                <option value="Chamarajanagar">Chamarajanagar</option>
+                <option value="Chikballapur">Chikballapur</option>
+                <option value="Chikkamagaluru">Chikkamagaluru</option>
+                <option value="DakshinaKannada">Dakshina Kannada</option>
+                <option value="Davanagere">Davanagere</option>
+                <option value="Gadag">Gadag</option>
+                <option value="Hassan">Hassan</option>
+                <option value="Haveri">Haveri</option>
+                <option value="Kalaburagi">Kalaburagi</option>
+                <option value="Kodagu">Kodagu</option>
+                <option value="Kolar">Kolar</option>
+                <option value="Koppal">Koppal</option>
+                <option value="Mandya">Mandya</option>
+                <option value="Mysuru">Mysuru</option>
+                <option value="Raichur">Raichur</option>
+                <option value="Ramanagara">Ramanagara</option>
+                <option value="Shivamogga">Shivamogga</option>
+                <option value="Tumakuru">Tumakuru</option>
+                <option value="Udupi">Udupi</option>
+                <option value="UttaraKannada">Uttara Kannada</option>
+                <option value="Vijayapura">Vijayapura</option>
+                <option value="Yadgir">Yadgir</option>
+                </select>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="place">Place:</label>
+            <select id="place" name="place" required>
+                <option value="">Select District First</option>
+            </select>
+        </div>
+
+        <div id="seller-fields">
+            <div class="form-group">
+                <label for="name">Seller Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
+
+    <a href="{{ url_for('login') }}" class="back-link">Back to Login</a>
+
+    <script>
+        const placesByDistrict = {
+            'BangaloreUrban': ['Bangalore South', 'Bangalore North', 'Anekal', 'Yelahanka', 'Rajajinagar'],
+            'BangaloreRural': ['Magadi', 'Nelamangala', 'Devanahalli', 'Hoskote', 'Doddaballapura'],
+            'Bagalkot': ['Bagalkot', 'Badami', 'Bailhongal', 'Hungund', 'Mudhol'],
+            'Ballari': ['Ballari', 'Hospet', 'Sandur', 'Huvina Hadagalli', 'Siruguppa'],
+            'Belagavi': ['Belagavi', 'Chikkodi', 'Raibag', 'Gokak', 'Savadatti'],
+            'Bidar': ['Bidar', 'Aurad', 'Basavakalyan', 'Humnabad', 'Nipani'],
+            'Chamarajanagar': ['Chamarajanagar', 'Kollegal', 'Yelandur', 'Satyamangala', 'Hanur'],
+            'Chikballapur': ['Chikballapur', 'Gauribidanur', 'Chintamani', 'Bagepalli', 'Shidlaghatta'],
+            'Chikkamagaluru': ['Chikkamagaluru', 'Kadur', 'Tarikere', 'Mudigere', 'Kadur'],
+            'DakshinaKannada': ['Mangalore', 'Puttur', 'Sullia', 'Bantwal', 'Belthangady'],
+            'Davanagere': ['Davanagere', 'Harihar', 'Jagalur', 'Honnali', 'Channagiri'],
+            'Gadag': ['Gadag', 'Bagalkot', 'Badami', 'Mundargi', 'Kuknoor'],
+            'Hassan': ['Hassan', 'Channarayapatna', 'Arasikere', 'Alur', 'Belur'],
+            'Haveri': ['Haveri', 'Ranebennur', 'Byadgi', 'Shiggaon', 'Kundgol'],
+            'Kalaburagi': ['Kalaburagi', 'Afzalpur', 'Aland', 'Chincholi', 'Gulbarga'],
+            'Kodagu': ['Madikeri', 'Virajpet', 'Somwarpet', 'Ponnampet', 'South Kodagu'],
+            'Kolar': ['Kolar', 'Malur', 'Chintamani', 'Bangarpet', 'Srinivaspur'],
+            'Koppal': ['Koppal', 'Gangavati', 'Yelburga', 'Kushtagi', 'Rabkavi'],
+            'Mandya': ['Mandya', 'Maddur', 'Nagamangala', 'Krishnarajpet', 'Srirangapatna'],
+            'Mysuru': ['Mysuru', 'Nanjangud', 'T.Narasipur', 'Hunsur', 'K.R.Pet'],
+            'Raichur': ['Raichur', 'Devadurga', 'Lingasugur', 'Manvi', 'Mithapur'],
+            'Ramanagara': ['Ramanagara', 'Channapatna', 'Kanakapura', 'Magadi', 'Doddamaravadi'],
+            'Shivamogga': ['Shivamogga', 'Bhadravathi', 'Sagara', 'Thirthahalli', 'Shikaripura'],
+            'Tumakuru': ['Tumakuru', 'Tiptur', 'Kunigal', 'Gubbi', 'Pavagada'],
+            'Udupi': ['Udupi', 'Kundapura', 'Karkala', 'Byndoor', 'Hebri'],
+            'UttaraKannada': ['Karwar', 'Kumta', 'Bhatkal', 'Honnavar', 'Ankola'],
+            'Vijayapura': ['Vijayapura', 'Basavana Bagewadi', 'Bagalkot', 'Sindagi', 'Jevargi'],
+            'Yadgir': ['Yadgir', 'Shahpur', 'Gulbarga', 'Raichur', 'Balamani']
+        };
+
+        function updatePlaces() {
+            const districtSelect = document.getElementById('district');
+            const placeSelect = document.getElementById('place');
+            const selectedDistrict = districtSelect.value;
+
+            // Clear existing options
+            placeSelect.innerHTML = '<option value="">Select Place</option>';
+
+            if (selectedDistrict && placesByDistrict[selectedDistrict]) {
+                placesByDistrict[selectedDistrict].forEach(place => {
+                    const option = document.createElement('option');
+                    option.value = place;
+                    option.textContent = place;
+                    placeSelect.appendChild(option);
+                });
+            }
+        }
+
+        function selectRole(role, button) {
+            document.getElementById('role').value = role;
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const sellerFields = document.getElementById('seller-fields');
+            if (role === 'seller') {
+                sellerFields.style.display = 'block';
+                document.getElementById('name').required = true;
+                document.getElementById('phone').required = true;
+            } else {
+                sellerFields.style.display = 'none';
+                document.getElementById('name').required = false;
+                document.getElementById('phone').required = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Profile - Fish Pleasant</title>
+    <style>
+        /* General body and text styles */
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2e3b4e;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        /* Table Styling */
+        
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        td {
+            background-color: #f9f9f9;
+        }
+        
+        td img {
+            border-radius: 50%;
+        }
+        /* Button Styles */
+        
+        .connectbtn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        
+        .connectbtn:hover {
+            background-color: #0056b3;
+        }
+        /* Back Link */
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Fish Details</h1>
+
+    # Fish Details
+
+    {% if fish_details %}
+    <table>
+        <thead>
+            <tr>
+                <th>Fish Name</th>
+                <th>Rate (₹/kg)</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fish in fish_details %}
+            <tr>
+                <td>{{ fish[2] }}</td>
+                <td>{{ fish[3] }}</td>
+                <td><img src="{{ url_for('static', filename=fish[4]) }}" width="100" alt="{{ fish[2] }}"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    No fish details available.
+    {% endif %}
+
+
+    <a href="/user_dashboard" class="back-link">Back to Dashboard</a>
+
+</body>
+
+</html>

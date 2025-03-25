@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .logout-btn:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>District</th>
+                <th>Place</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[2] }}</td>
+                <td>{{ user[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Sellers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>District</th>
+                <th>Place</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in sellers %}
+            <tr>
+                <td>{{ seller[0] }}</td>
+                <td>{{ seller[1] }}</td>
+                <td>{{ seller[2] }}</td>
+                <td>{{ seller[3] }}</td>
+                <td>{{ seller[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</body>
+
+</html>
